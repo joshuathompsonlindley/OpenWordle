@@ -1,0 +1,10 @@
+Flask
+Flask-Caching
+Flask-Limiter
+Flask-SQLAlchemy
+flask-talisman
+flake8
+mypy
+SQLAlchemy
+safety
+pylint

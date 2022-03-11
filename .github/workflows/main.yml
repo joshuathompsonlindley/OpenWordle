@@ -1,0 +1,46 @@
+name: Continuous Integration
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.10"
+    - name: Setup
+      run: ci/setup_worker.sh
+    - name: 'Static Checks: Backend'
+      run:  ci/codescan.sh -b
+    - name: 'Static Checks: Frontend'
+      run: ci/codescan.sh -f
+    - name: 'Unit Tests: Backend'
+      run: ci/test_runner.sh -u
+    - name: API Integration Tests
+      run: ci/test_runner.sh -i
+    - name: End to End Integration Tests
+      run: ci/test_runner.sh -e
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      if: failure()
+      with:
+        name: cypress-screenshots
+        path: |
+          /home/runner/work/openwordle/openwordle/cypress/screenshots/
+          /home/runner/work/openwordle/openwordle/cypress/videos/
+        if-no-files-found: ignore
+        retention-days: 1
+    - name: Notify Slack Channel
+      id: slack
+      uses: slackapi/slack-github-action@v1.18
+      with:
+        channel-id: 'C0332UVN0PR'
+        slack-message: "OpenWordle Build (${{github.job}}#${{github.run_id}}) Status:\n- Initiated by ${{github.actor}}\n- Status: ${{ job.status }}"
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+

@@ -1,0 +1,33 @@
+#!/bin/bash
+
+if [ ! -d "/home/overflow/apps/OpenWordle" ]; then
+    echo '! Cannot find the install folder.'
+    echo '! Please run the OpenWordle installer before committing.'
+    exit 1
+fi
+
+SHOULD_ALLOW=0
+
+echo 'Validating Python...'
+
+flake8 $(git ls-files '*.py')
+SHOULD_ALLOW=$(($SHOULD_ALLOW + $?))
+
+mypy --show-error-codes --pretty --ignore-missing-imports --disable-error-code attr-defined $(git ls-files '*.py')
+SHOULD_ALLOW=$(($SHOULD_ALLOW + $?))
+
+pylint --rcfile=/home/overflow/apps/OpenWordle/CI/.pylintrc $(git ls-files '*.py')
+SHOULD_ALLOW=$(($SHOULD_ALLOW + $?))
+
+safety check --full-report -i 40459
+SHOULD_ALLOW=$(($SHOULD_ALLOW + $?))
+
+echo 'Validating TypeScript...'
+
+npx eslint -c GameEngine/.eslintrc.json GameEngine/engine/*.ts
+SHOULD_ALLOW=$(($SHOULD_ALLOW + $?))
+
+if [[ $SHOULD_ALLOW -ne 0 ]]; then
+    echo "Please fix the errors and then commit again"
+    exit 1
+fi

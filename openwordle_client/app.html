@@ -1,0 +1,99 @@
+<!--
+   Copyright 2022 Overflow Digital
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="language" content="English">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="index, nofollow">
+    <meta name="revisit-after" content="10 days">
+    <meta name="application-name" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='logo.png') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='logo.png') }}">
+    <title></title>
+</head>
+
+<body>
+    <style>
+        * {
+            box-sizing: border-box;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+        }
+
+        body {
+            background: #ffffff;
+            color: #000000;
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            position: absolute;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            width: 100%;
+            font-family: sans-serif;
+            transition: ease-in-out 0.2s;
+        }
+
+        .app {
+            -ms-flex-pack: center;
+            -ms-flex-align: center;
+            align-items: center;
+            display: grid;
+            grid-template: auto 1fr auto auto/1fr;
+            height: 100%;
+            justify-content: center;
+            margin: 0 auto;
+            max-width: 428px;
+            min-width: 320px;
+            padding: 0 1rem calc(env(safe-area-inset-bottom) + 0.5rem);
+            width: 100vw;
+        }
+
+        .🟩 {
+            background-color: #4caf50 !important;
+            color: #ffffff !important;
+        }
+
+        .🟨 {
+            background-color: #ff9800 !important;
+            color: #ffffff !important;
+        }
+
+        .⬛ {
+            background-color: #2e2e2e !important;
+            color: #ffffff !important;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #000000;
+                color: #ffffff;
+            }
+        }
+    </style>
+    <div id="app" class="app"></div>
+    <script type="module" src="{{ url_for('static', filename='openwordle.js') }}"></script>
+</body>
+
+</html>

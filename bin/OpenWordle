@@ -1,0 +1,14 @@
+#!/bin/bash
+
+cd /home/overflow/apps/OpenWordle/bin/dist
+
+source /home/overflow/apps/OpenWordle/configuration.sh
+
+export ow_secret=$SECRET_KEY
+export ow_app=openwordle.py
+export ow_base=OpenWordle
+export ow_host=$HOST
+export ow_port=$PORT
+export FLASK_ENV=production
+
+python3 openwordle.py

@@ -1,0 +1,12 @@
+[Unit]
+Description=OpenWordle Deployment Target
+After=network.target
+
+[Service]
+User=overflow
+Group=overflow
+WorkingDirectory=/home/overflow/apps/OpenWordle/bin/dist
+ExecStart=/home/overflow/apps/OpenWordle/bin/OpenWordle
+
+[Install]
+WantedBy=multi-user.target

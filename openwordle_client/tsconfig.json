@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "target": "ES2017",
+      "lib": ["ES2015", "DOM", "ES6", "ES2017"],
+      "removeComments": true,
+      "preserveConstEnums": true,
+      "outDir": "./build/",
+      "sourceRoot": "./engine/",
+      "rootDir": "./engine/",
+      "sourceMap": true,
+      "downlevelIteration": true,
+      "module": "ES6"
+    }
+  }
