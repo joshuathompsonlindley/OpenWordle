@@ -26,7 +26,7 @@ jobs:
     - name: End to End Integration Tests
       run: ci/test_runner.sh -e
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       if: failure()
       with:
         name: cypress-screenshots
