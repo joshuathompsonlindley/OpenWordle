@@ -37,7 +37,7 @@ jobs:
         retention-days: 1
     - name: Notify Slack Channel
       id: slack
-      uses: slackapi/slack-github-action@v1.18
+      uses: slackapi/slack-github-action@v1.21
       with:
         channel-id: 'C0332UVN0PR'
         slack-message: "OpenWordle Build (${{github.job}}#${{github.run_id}}) Status:\n- Initiated by ${{github.actor}}\n- Status: ${{ job.status }}"
